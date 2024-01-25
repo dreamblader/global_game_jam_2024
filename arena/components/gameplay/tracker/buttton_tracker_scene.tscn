@@ -4,9 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://p8yin1ynd6i0" path="res://arena/components/gameplay/tracker/Ellipse_1.png" id="2_sw1us"]
 [ext_resource type="PackedScene" uid="uid://cwx6lsilwu6h1" path="res://arena/components/gameplay/pointer/pointer_scene.tscn" id="3_xn43n"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_owp3o"]
-radius = 3.0
-height = 20.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_ekoj1"]
+radius = 5.5
 
 [node name="ButttonTracker" type="Node2D"]
 position = Vector2(252, 166)
@@ -17,19 +16,21 @@ texture = ExtResource("2_sw1us")
 
 [node name="PointerA" parent="." instance=ExtResource("3_xn43n")]
 modulate = Color(0, 0, 1, 1)
-rotation = 0.349066
+action_name = "tickle_a"
+init_rotation_degrees = 20.0
 
 [node name="PointerB" parent="." instance=ExtResource("3_xn43n")]
 modulate = Color(0, 1, 0, 1)
-rotation = -0.349066
+action_name = "tickle_b"
+init_rotation_degrees = -20.0
 
 [node name="PressPrompt" type="Area2D" parent="." groups=["prompt"]]
-position = Vector2(-54, 0)
+position = Vector2(-60, 0)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PressPrompt"]
-shape = SubResource("CapsuleShape2D_owp3o")
-debug_color = Color(1, 1, 1, 1)
+shape = SubResource("CircleShape2D_ekoj1")
+debug_color = Color(1, 1, 1, 0.443137)
 
 [connection signal="area_entered" from="PointerA" to="." method="_on_pointer_a_area_entered"]
 [connection signal="area_exited" from="PointerA" to="." method="_on_pointer_a_area_exited"]

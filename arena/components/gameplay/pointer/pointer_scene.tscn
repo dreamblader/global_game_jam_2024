@@ -1,22 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwx6lsilwu6h1"]
+[gd_scene load_steps=3 format=3 uid="uid://cwx6lsilwu6h1"]
 
 [ext_resource type="Script" path="res://arena/components/gameplay/pointer/pointer_script.gd" id="1_fi7km"]
-[ext_resource type="Texture2D" uid="uid://p8yin1ynd6i0" path="res://arena/components/gameplay/tracker/Ellipse_1.png" id="2_km33m"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_aae2t"]
-b = Vector2(0, 57)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrtdl"]
+size = Vector2(5, 60)
 
 [node name="Pointer" type="Area2D"]
 script = ExtResource("1_fi7km")
 
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 60, 0, 0)
+width = 5.0
+
 [node name="Collision" type="CollisionShape2D" parent="."]
-shape = SubResource("SegmentShape2D_aae2t")
-debug_color = Color(1, 1, 1, 1)
+position = Vector2(0, 30)
+shape = SubResource("RectangleShape2D_qrtdl")
 
 [node name="Tip" type="Node2D" parent="."]
-position = Vector2(-0.324767, 57.5838)
+position = Vector2(0, 60)
 
-[node name="Ellipse1" type="Sprite2D" parent="Tip"]
-modulate = Color(0, 0, 0, 1)
-scale = Vector2(0.025, 0.025)
-texture = ExtResource("2_km33m")
+[node name="Control" type="ColorRect" parent="Tip"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -0.5
+offset_right = 1.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 1)
