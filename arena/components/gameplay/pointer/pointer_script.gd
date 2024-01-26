@@ -10,6 +10,7 @@ class_name Pointer
 @onready var tip: Node2D = $Tip
 
 signal hit(critical:bool)
+signal fail
 
 
 func _ready() -> void:
@@ -39,11 +40,14 @@ func check_correct_input() -> void:
 	print(correct_distance)
 	if correct_distance >= 0:
 		emit_signal("hit", correct_distance<critical_distance)
+	else:
+		emit_signal("fail")
 
 
 func check_pointer_distance_prompt(areas: Array[Area2D]) -> float:
 	for area in areas:
 		if area.is_in_group("prompt"):
+			area.pressed()
 			return tip.global_position.distance_to(area.global_position)
 	return -1
 
@@ -51,3 +55,9 @@ func check_pointer_distance_prompt(areas: Array[Area2D]) -> float:
 func reset() -> void:
 	self.position = init_position
 	self.rotation_degrees = init_rotation_degrees
+
+
+func _on_area_exited(area: Area2D) -> void:
+	if area.is_in_group("prompt") && !area.hit:
+		area.forgot()
+		emit_signal("fail")
