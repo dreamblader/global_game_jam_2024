@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7j0v1cql8uvi"]
+[gd_scene load_steps=4 format=3 uid="uid://b7j0v1cql8uvi"]
 
 [ext_resource type="PackedScene" uid="uid://b3olg2bdptcc0" path="res://arena/components/gameplay/tracker/buttton_tracker_scene.tscn" id="1_lhkir"]
+[ext_resource type="PackedScene" uid="uid://cuf8tgbiy8bmv" path="res://arena/components/visual/profile/profile_scene.tscn" id="2_p00i4"]
+[ext_resource type="PackedScene" uid="uid://48fbe3yg01cy" path="res://arena/components/visual/battle/battle_scene.tscn" id="3_kytcw"]
 
 [node name="Arena" type="HBoxContainer"]
-custom_minimum_size = Vector2(1920, 1080)
+custom_minimum_size = Vector2(426, 240)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,25 +13,58 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LeftContainer" type="Control" parent="."]
-custom_minimum_size = Vector2(384, 1080)
+custom_minimum_size = Vector2(85, 240)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Content" type="Control" parent="LeftContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 37.5
+offset_right = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButttonTracker" parent="LeftContainer/Content" instance=ExtResource("1_lhkir")]
+
+[node name="ProfilePicture" parent="LeftContainer/Content" instance=ExtResource("2_p00i4")]
 
 [node name="Profile" type="CenterContainer" parent="LeftContainer"]
-layout_mode = 0
-offset_right = 342.0
-offset_bottom = 342.0
-
-[node name="ProfilePicture" type="AnimatedSprite2D" parent="LeftContainer/Profile"]
-
-[node name="ButttonTracker" parent="LeftContainer/Profile" instance=ExtResource("1_lhkir")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -51.0
+offset_right = 43.5
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MidContainer" type="Control" parent="."]
-custom_minimum_size = Vector2(1152, 1080)
+custom_minimum_size = Vector2(256, 240)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Content" type="Control" parent="MidContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Battle" parent="MidContainer/Content" instance=ExtResource("3_kytcw")]
+
 [node name="RightContainer" type="Control" parent="."]
-custom_minimum_size = Vector2(384, 1080)
+custom_minimum_size = Vector2(85, 240)
 layout_mode = 2
 size_flags_horizontal = 3

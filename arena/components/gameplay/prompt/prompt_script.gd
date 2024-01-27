@@ -6,7 +6,7 @@ var size:float = 12.0
 @export var scale_size_sprite: float = 12.0
 
 @onready var colission: CollisionShape2D = $CollisionShape2D
-@onready var sprite: Sprite2D = $CircleEmpty
+@onready var sprite: Sprite2D = $Sprite
 
 
 func set_size(value:float)-> void:
@@ -17,13 +17,11 @@ func set_size(value:float)-> void:
 
 
 func pressed() -> void:
-	sprite.modulate.a = 0
 	hit = true
 	destroy()
 
 
 func forgot() -> void:
-	sprite.modulate = Color(0,1,1)
 	destroy()
 
 

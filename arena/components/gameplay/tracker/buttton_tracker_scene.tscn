@@ -1,30 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3olg2bdptcc0"]
+[gd_scene load_steps=8 format=3 uid="uid://b3olg2bdptcc0"]
 
 [ext_resource type="Script" path="res://arena/components/gameplay/tracker/buttton_tracker_script.gd" id="1_dchjs"]
 [ext_resource type="PackedScene" uid="uid://bgtdvw1mlrs5l" path="res://arena/components/gameplay/prompt/prompt_scene.tscn" id="2_dbahx"]
-[ext_resource type="Texture2D" uid="uid://p8yin1ynd6i0" path="res://arena/components/gameplay/tracker/Ellipse_1.png" id="2_sw1us"]
+[ext_resource type="Texture2D" uid="uid://djighlhimvli6" path="res://arena/components/gameplay/prompt/circle_empty.png" id="3_6ptcr"]
 [ext_resource type="PackedScene" uid="uid://cwx6lsilwu6h1" path="res://arena/components/gameplay/pointer/pointer_scene.tscn" id="3_xn43n"]
+[ext_resource type="Texture2D" uid="uid://svqip8ec1p2p" path="res://arena/components/gameplay/prompt/square_empty.png" id="4_kyq5q"]
+[ext_resource type="Texture2D" uid="uid://cfxx4p0d32cdu" path="res://arena/components/gameplay/pointer/circle.png" id="5_sp48u"]
+[ext_resource type="Texture2D" uid="uid://bcawqyld85ksq" path="res://arena/components/gameplay/pointer/square.png" id="6_ps2q1"]
 
 [node name="ButttonTracker" type="Node2D"]
-position = Vector2(252, 166)
 script = ExtResource("1_dchjs")
+prompt_size = 12.0
 prompt_scene = ExtResource("2_dbahx")
-
-[node name="Ellipse" type="Sprite2D" parent="."]
-texture = ExtResource("2_sw1us")
+prompt_distance_of_border = 56.0
+prompt_textures = Array[CompressedTexture2D]([ExtResource("3_6ptcr"), ExtResource("4_kyq5q")])
 
 [node name="PointerA" parent="." instance=ExtResource("3_xn43n")]
-modulate = Color(0, 0, 1, 1)
 action_name = "tickle_a"
+radius = 56.0
+colission_radius = 10.0
 init_rotation_degrees = 20.0
+texture = ExtResource("5_sp48u")
 
 [node name="PointerB" parent="." instance=ExtResource("3_xn43n")]
-modulate = Color(0, 1, 0, 1)
 action_name = "tickle_b"
+radius = 56.0
+colission_radius = 10.0
 init_rotation_degrees = -20.0
-
-[node name="PressPrompt" parent="." instance=ExtResource("2_dbahx")]
-position = Vector2(-60, 0)
+texture = ExtResource("6_ps2q1")
 
 [connection signal="fail" from="PointerA" to="." method="_on_pointer_a_fail"]
 [connection signal="hit" from="PointerA" to="." method="_on_pointer_a_hit"]

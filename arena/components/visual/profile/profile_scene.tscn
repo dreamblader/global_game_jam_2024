@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuf8tgbiy8bmv"]
+
+[ext_resource type="Texture2D" uid="uid://dfmavs8cd6a4" path="res://arena/components/visual/profile/player_1_portrait.png" id="1_apwrk"]
+
+[node name="ProfilePicture" type="Sprite2D"]
+texture = ExtResource("1_apwrk")
+hframes = 4
+frame = 1

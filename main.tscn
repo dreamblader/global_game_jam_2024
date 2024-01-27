@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://d18i4utudkesw"]
+[gd_scene load_steps=2 format=3 uid="uid://d18i4utudkesw"]
+
+[ext_resource type="PackedScene" uid="uid://b7j0v1cql8uvi" path="res://arena/arena_scene.tscn" id="1_gt2aw"]
 
 [node name="Root" type="Node2D"]
+
+[node name="Arena" parent="." instance=ExtResource("1_gt2aw")]
+offset_right = 434.0
+offset_bottom = 240.0
