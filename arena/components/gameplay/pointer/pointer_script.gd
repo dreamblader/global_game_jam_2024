@@ -86,4 +86,5 @@ func reset() -> void:
 func _on_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("prompt") && !area.hit:
 		area.forgot()
+		print("miss")
 		emit_signal("fail")
