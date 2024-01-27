@@ -19,6 +19,8 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var left_arc: Vector2 = Vector2(-90, -270)
 var right_arc: Vector2 = Vector2(-90, 90)
 
+signal hit(type:Pointer.HitTypes, id:int)
+signal fail(type:Pointer.HitTypes, id:int)
 
 func _ready() -> void:
 	rng.randomize()
@@ -71,17 +73,19 @@ func get_prompt_position_based_on_angle(angle:float) -> Vector2:
 
 func _on_pointer_a_hit(hit_type: Pointer.HitTypes) -> void:
 	pointer_a.speed += hit_type
+	emit_signal("hit", hit_type)
 
 
 func _on_pointer_b_hit(hit_type: Pointer.HitTypes) -> void:
 	pointer_b.speed += hit_type
+	emit_signal("hit", hit_type, player_id)
 
 
 func _on_pointer_a_fail() -> void:
 	pointer_a.speed = max(pointer_a.speed-1.5, pointer_min_speed)
-	pass # Replace with function body.
+	emit_signal("fail", player_id)
 
 
 func _on_pointer_b_fail() -> void:
 	pointer_b.speed = max(pointer_b.speed-1.5, pointer_min_speed)
-	pass # Replace with function body.
+	emit_signal("fail", player_id)

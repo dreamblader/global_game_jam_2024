@@ -70,3 +70,6 @@ grow_vertical = 2
 custom_minimum_size = Vector2(85, 240)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[connection signal="fail" from="LeftContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_fail"]
+[connection signal="hit" from="LeftContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_hit"]
