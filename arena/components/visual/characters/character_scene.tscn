@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmasnq5wkal8u"]
+[gd_scene load_steps=10 format=3 uid="uid://bmasnq5wkal8u"]
 
 [ext_resource type="Texture2D" uid="uid://ccvmf8gj4mbhb" path="res://arena/components/visual/characters/player_1_character.png" id="1_ocv82"]
+[ext_resource type="Script" path="res://arena/components/visual/characters/character_script.gd" id="2_nw0sg"]
 
 [sub_resource type="Animation" id="Animation_bdqsj"]
 resource_name = "idle"
@@ -113,8 +114,11 @@ _data = {
 [node name="Character" type="Sprite2D"]
 texture = ExtResource("1_ocv82")
 hframes = 20
+script = ExtResource("2_nw0sg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_j0vqq")
 }
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p8yin1ynd6i0"
-path="res://.godot/imported/Ellipse_1.png-3ba54a9a94862e7d1237afa00acbf921.ctex"
+uid="uid://b8h1eeubqfwu7"
+path="res://.godot/imported/background.png-a2e71f3cfd99a9a1b3516ed92d368523.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://arena/components/gameplay/tracker/Ellipse_1.png"
-dest_files=["res://.godot/imported/Ellipse_1.png-3ba54a9a94862e7d1237afa00acbf921.ctex"]
+source_file="res://arena/components/visual/background.png"
+dest_files=["res://.godot/imported/background.png-a2e71f3cfd99a9a1b3516ed92d368523.ctex"]
 
 [params]
 

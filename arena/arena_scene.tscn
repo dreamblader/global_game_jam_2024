@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7j0v1cql8uvi"]
+[gd_scene load_steps=6 format=3 uid="uid://b7j0v1cql8uvi"]
 
 [ext_resource type="Script" path="res://arena/arena_script.gd" id="1_6nlnr"]
 [ext_resource type="PackedScene" uid="uid://b3olg2bdptcc0" path="res://arena/components/gameplay/tracker/buttton_tracker_scene.tscn" id="1_lhkir"]
+[ext_resource type="Texture2D" uid="uid://b8h1eeubqfwu7" path="res://arena/components/visual/background.png" id="2_itvdl"]
 [ext_resource type="PackedScene" uid="uid://cuf8tgbiy8bmv" path="res://arena/components/visual/profile/profile_scene.tscn" id="2_p00i4"]
 [ext_resource type="PackedScene" uid="uid://48fbe3yg01cy" path="res://arena/components/visual/battle/battle_scene.tscn" id="3_kytcw"]
 
@@ -13,6 +14,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6nlnr")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(213, 120)
+texture = ExtResource("2_itvdl")
 
 [node name="LeftContainer" type="Control" parent="."]
 custom_minimum_size = Vector2(85, 240)
@@ -50,7 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MidContainer" type="Control" parent="."]
-custom_minimum_size = Vector2(256, 240)
+custom_minimum_size = Vector2(248, 240)
 layout_mode = 2
 size_flags_horizontal = 3
 
