@@ -26,6 +26,7 @@ func hit() -> void:
 func win() -> void:
 	if !animation_lock:
 		animation.play("win")
+		animation_lock = true
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

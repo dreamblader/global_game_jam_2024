@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7j0v1cql8uvi"]
+[gd_scene load_steps=11 format=3 uid="uid://b7j0v1cql8uvi"]
 
 [ext_resource type="Script" path="res://arena/arena_script.gd" id="1_6nlnr"]
 [ext_resource type="PackedScene" uid="uid://b3olg2bdptcc0" path="res://arena/components/gameplay/tracker/buttton_tracker_scene.tscn" id="1_lhkir"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://cuf8tgbiy8bmv" path="res://arena/components/visual/profile/profile_scene.tscn" id="2_p00i4"]
 [ext_resource type="PackedScene" uid="uid://48fbe3yg01cy" path="res://arena/components/visual/battle/battle_scene.tscn" id="3_kytcw"]
 [ext_resource type="Texture2D" uid="uid://dfmavs8cd6a4" path="res://arena/components/visual/profile/player_1_portrait.png" id="5_n046o"]
+[ext_resource type="PackedScene" uid="uid://b076mtxxcm54g" path="res://arena/components/gameplay/buttons/butons_scene.tscn" id="6_gu68v"]
+[ext_resource type="FontFile" uid="uid://bafwgk7nr68a5" path="res://arena/components/fonts/Namecat.otf" id="7_ahefm"]
 [ext_resource type="Texture2D" uid="uid://ddltav62o7xhu" path="res://arena/components/visual/profile/player_2_portrait.png" id="7_hw4oc"]
+[ext_resource type="AudioStream" uid="uid://cqevhc7v55nha" path="res://arena/music.mp3" id="9_4p2mi"]
 
 [node name="Arena" type="HBoxContainer"]
 custom_minimum_size = Vector2(426, 240)
@@ -16,6 +19,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6nlnr")
+player_max_life = 50.0
+round_time = 30.0
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(213, 120)
@@ -33,15 +38,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 37.5
-offset_right = 37.5
+offset_left = 32.5
+offset_right = 32.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButttonTracker" parent="LeftContainer/Content" instance=ExtResource("1_lhkir")]
-
 [node name="ProfilePicture" parent="LeftContainer/Content" instance=ExtResource("2_p00i4")]
 my_texture = ExtResource("5_n046o")
+
+[node name="ButttonTracker" parent="LeftContainer/Content" instance=ExtResource("1_lhkir")]
+
+[node name="Butons" parent="LeftContainer/Content" instance=ExtResource("6_gu68v")]
+position = Vector2(0, 80)
+label_circle = "A"
+label_square = "S"
 
 [node name="Profile" type="CenterContainer" parent="LeftContainer"]
 layout_mode = 1
@@ -74,6 +84,23 @@ grow_vertical = 2
 
 [node name="Battle" parent="MidContainer/Content" instance=ExtResource("3_kytcw")]
 
+[node name="Label" type="Label" parent="MidContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 43.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.658824, 0, 1)
+theme_override_fonts/font = ExtResource("7_ahefm")
+theme_override_font_sizes/font_size = 35
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="RightContainer" type="Control" parent="."]
 custom_minimum_size = Vector2(85, 240)
 layout_mode = 2
@@ -86,18 +113,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -32.5
-offset_right = -32.5
+offset_left = -27.5
+offset_right = -27.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ProfilePicture" parent="RightContainer/Content" instance=ExtResource("2_p00i4")]
+my_texture = ExtResource("7_hw4oc")
 
 [node name="ButttonTracker" parent="RightContainer/Content" instance=ExtResource("1_lhkir")]
 player_id = 2
 
-[node name="ProfilePicture" parent="RightContainer/Content" instance=ExtResource("2_p00i4")]
-my_texture = ExtResource("7_hw4oc")
+[node name="Butons" parent="RightContainer/Content" instance=ExtResource("6_gu68v")]
+position = Vector2(0, 80)
+label_circle = "K"
+label_square = "L"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_4p2mi")
 
 [connection signal="fail" from="LeftContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_fail"]
 [connection signal="hit" from="LeftContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_hit"]
 [connection signal="fail" from="RightContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_fail"]
 [connection signal="hit" from="RightContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

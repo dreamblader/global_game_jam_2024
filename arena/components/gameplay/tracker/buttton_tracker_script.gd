@@ -29,10 +29,34 @@ signal fail(id:int)
 
 func _ready() -> void:
 	rng.randomize()
+	set_pointers_buttons()
 	init_arc_positions(1)
 	init_arc_positions(-1)
+	stop_tracker()
+
+
+func stop_tracker() -> void:
+	pointer_a.lock = true
+	pointer_b.lock = true
+	gone = true
+
+
+func start_tracker() -> void:
+	pointer_a.lock = false
+	pointer_b.lock = false
+	prompt_num_start_left = 1
+	prompt_num_start_right = 1
+	visible = true
+	gone = false
 	spawn_prompts(right_arc, 1)
 	spawn_prompts(left_arc, -1)
+
+
+func set_pointers_buttons() -> void:
+	var tickle_a:String = "tickle_a"
+	var tickle_b:String = "tickle_b"
+	pointer_a.action_name = tickle_a+str(player_id)
+	pointer_b.action_name = tickle_b+str(player_id)
 
 
 func init_arc_positions(side: int)-> void:
@@ -113,9 +137,7 @@ func _on_pointer_b_fail() -> void:
 
 
 func kill_tracker() -> void:
-	pointer_a.lock = true
-	pointer_b.lock = true
+	stop_tracker()
 	visible = false
-	gone = true
 	for prompt in get_tree().get_nodes_in_group("prompt"):
 		prompt.queue_free()

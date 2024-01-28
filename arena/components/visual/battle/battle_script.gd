@@ -26,3 +26,13 @@ func player_dies(player_id:int) -> void:
 			player2.dead = true
 		_:
 			printerr("Invalid Player ID")
+
+
+func player_lose_timeout(player_id:int) -> void:
+		match player_id:
+			1:
+				player2.win()
+			2:
+				player1.win()
+			_:
+				printerr("Invalid Player ID")
