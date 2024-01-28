@@ -24,5 +24,7 @@ func set_life(life:float) -> void:
 	var life_left: float = max_life-life
 	var state_treshold: float = max_life/states
 	var state: int = floor(life_left/state_treshold)
+	var inflate = 1.0 + (life_left/1000)
 	progress.value = life_left
 	frame = state
+	scale = Vector2(inflate,inflate)
