@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7j0v1cql8uvi"]
+[gd_scene load_steps=8 format=3 uid="uid://b7j0v1cql8uvi"]
 
 [ext_resource type="Script" path="res://arena/arena_script.gd" id="1_6nlnr"]
 [ext_resource type="PackedScene" uid="uid://b3olg2bdptcc0" path="res://arena/components/gameplay/tracker/buttton_tracker_scene.tscn" id="1_lhkir"]
 [ext_resource type="Texture2D" uid="uid://b8h1eeubqfwu7" path="res://arena/components/visual/background.png" id="2_itvdl"]
 [ext_resource type="PackedScene" uid="uid://cuf8tgbiy8bmv" path="res://arena/components/visual/profile/profile_scene.tscn" id="2_p00i4"]
 [ext_resource type="PackedScene" uid="uid://48fbe3yg01cy" path="res://arena/components/visual/battle/battle_scene.tscn" id="3_kytcw"]
+[ext_resource type="Texture2D" uid="uid://dfmavs8cd6a4" path="res://arena/components/visual/profile/player_1_portrait.png" id="5_n046o"]
+[ext_resource type="Texture2D" uid="uid://ddltav62o7xhu" path="res://arena/components/visual/profile/player_2_portrait.png" id="7_hw4oc"]
 
 [node name="Arena" type="HBoxContainer"]
 custom_minimum_size = Vector2(426, 240)
@@ -39,6 +41,7 @@ grow_vertical = 2
 [node name="ButttonTracker" parent="LeftContainer/Content" instance=ExtResource("1_lhkir")]
 
 [node name="ProfilePicture" parent="LeftContainer/Content" instance=ExtResource("2_p00i4")]
+my_texture = ExtResource("5_n046o")
 
 [node name="Profile" type="CenterContainer" parent="LeftContainer"]
 layout_mode = 1
@@ -76,5 +79,24 @@ custom_minimum_size = Vector2(85, 240)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Content" type="Control" parent="RightContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_right = -32.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButttonTracker" parent="RightContainer/Content" instance=ExtResource("1_lhkir")]
+
+[node name="ProfilePicture" parent="RightContainer/Content" instance=ExtResource("2_p00i4")]
+my_texture = ExtResource("7_hw4oc")
+
 [connection signal="fail" from="LeftContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_fail"]
 [connection signal="hit" from="LeftContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_hit"]
+[connection signal="fail" from="RightContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_fail"]
+[connection signal="hit" from="RightContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_hit"]

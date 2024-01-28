@@ -31,6 +31,8 @@ func win() -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "hit" && dead:
 		animation.play("dead")
+	elif anim_name == "dead":
+		visible = false
 	elif dead:
 		animation_lock = true
 		animation.play("hit")

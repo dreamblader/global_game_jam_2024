@@ -1,6 +1,7 @@
 extends Sprite2D
 
 @export var max_life:float
+@export var my_texture:CompressedTexture2D
 
 @onready var progress:TextureProgressBar = $TextureProgressBar
 
@@ -10,6 +11,7 @@ var states:int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	states = hframes
+	texture = my_texture
 	progress.max_value = max_life
 
 

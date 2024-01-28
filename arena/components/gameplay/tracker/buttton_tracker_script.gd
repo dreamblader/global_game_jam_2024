@@ -20,10 +20,12 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var left_arc: Vector2 = Vector2(-90, -270)
 var right_arc: Vector2 = Vector2(-90, 90)
 var right_arc_positions: Array[float] 
-var left_arc_positions: Array[float] 
+var left_arc_positions: Array[float]
+var gone:bool = false 
 
 signal hit(type:Pointer.HitTypes, id:int)
 signal fail(id:int)
+
 
 func _ready() -> void:
 	rng.randomize()
@@ -67,8 +69,9 @@ func spawn_prompts(circular_quarter:Vector2, side:int) -> void:
 
 
 func _process(delta:float) -> void:
-	move_pointer(pointer_a, delta, true)
-	move_pointer(pointer_b, delta, false)
+	if !gone:
+		move_pointer(pointer_a, delta, true)
+		move_pointer(pointer_b, delta, false)
 
 
 func move_pointer(pointer: Pointer, delta:float, clockwise:bool) -> void:
@@ -107,3 +110,12 @@ func _on_pointer_a_fail() -> void:
 func _on_pointer_b_fail() -> void:
 	pointer_b.speed = max(pointer_b.speed-1.5, pointer_min_speed)
 	emit_signal("fail", player_id)
+
+
+func kill_tracker() -> void:
+	pointer_a.lock = true
+	pointer_b.lock = true
+	visible = false
+	gone = true
+	for prompt in get_tree().get_nodes_in_group("prompt"):
+		prompt.queue_free()

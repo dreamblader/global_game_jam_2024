@@ -16,6 +16,8 @@ enum HitTypes{Nah, Ok, Good, Great}
 @onready var collision: CollisionShape2D = $Area/Collision
 @onready var sprite:Sprite2D = $Sprite
 
+var lock:bool = false
+
 signal hit(type:HitTypes)
 signal fail
 
@@ -35,7 +37,7 @@ func set_sprite() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(action_name):
+	if !lock && event.is_action_pressed(action_name):
 		check_correct_input()
 
 

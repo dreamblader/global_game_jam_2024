@@ -3,7 +3,10 @@ extends HBoxContainer
 @export var player_max_life:float = 100
 
 @onready var battle:Node2D = $MidContainer/Content/Battle
+@onready var player1_tracker: Node2D = $LeftContainer/Content/ButttonTracker
 @onready var player1_life_portrait: Sprite2D = $LeftContainer/Content/ProfilePicture
+@onready var player2_tracker: Node2D = $RightContainer/Content/ButttonTracker
+@onready var player2_life_portrait: Sprite2D = $RightContainer/Content/ProfilePicture
 
 var player1_life:float
 var player2_life:float
@@ -13,7 +16,7 @@ func _ready() -> void:
 	player1_life = player_max_life
 	player2_life = player_max_life
 	player1_life_portrait.set_max_life(player_max_life)
-	#add player2
+	player2_life_portrait.set_max_life(player_max_life)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,3 +47,7 @@ func hit_player(value:float, player_id:int) -> void:
 func player1_dmg(value:float) -> void:
 	player1_life -= value
 	player1_life_portrait.set_life(player1_life)
+	if player1_life <= 0:
+		#kill tracker
+		player1_tracker.kill_tracker()
+		battle.player_dies(1)
