@@ -92,6 +92,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ButttonTracker" parent="RightContainer/Content" instance=ExtResource("1_lhkir")]
+player_id = 2
 
 [node name="ProfilePicture" parent="RightContainer/Content" instance=ExtResource("2_p00i4")]
 my_texture = ExtResource("7_hw4oc")
