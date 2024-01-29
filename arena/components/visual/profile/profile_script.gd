@@ -18,6 +18,12 @@ func _ready() -> void:
 	progress.max_value = max_life
 
 
+func reset() -> void:
+	progress.value = 0
+	sprite.frame = 0
+	sprite.scale = Vector2(1.0, 1.0)
+
+
 func set_max_life(new_max:float) -> void:
 	max_life = new_max
 	progress.max_value = max_life

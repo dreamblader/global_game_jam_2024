@@ -14,26 +14,26 @@ square_texture = Array[CompressedTexture2D]([ExtResource("2_progo"), ExtResource
 
 [node name="CircleButtonNormal" type="Sprite2D" parent="."]
 position = Vector2(-40, 0)
-texture = ExtResource("3_d2egb")
+texture = ExtResource("1_dc2gc")
 
-[node name="SquareButtonNormal" type="Sprite2D" parent="."]
-position = Vector2(40, 0)
-texture = ExtResource("2_progo")
-
-[node name="LabelCircle" type="Label" parent="."]
-offset_left = -48.0
+[node name="LabelCircle" type="Label" parent="CircleButtonNormal"]
+offset_left = -8.0
 offset_top = -16.0
-offset_right = -33.0
+offset_right = 7.0
 offset_bottom = 8.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_sgjp7")
 theme_override_font_sizes/font_size = 25
 text = "A"
 
-[node name="LabelSquare" type="Label" parent="."]
-offset_left = 33.0
+[node name="SquareButtonNormal" type="Sprite2D" parent="."]
+position = Vector2(40, 0)
+texture = ExtResource("2_progo")
+
+[node name="LabelSquare" type="Label" parent="SquareButtonNormal"]
+offset_left = -7.0
 offset_top = -16.0
-offset_right = 48.0
+offset_right = 8.0
 offset_bottom = 8.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_sgjp7")

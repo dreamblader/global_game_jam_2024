@@ -16,3 +16,6 @@ my_texture = ExtResource("3_7tvl3")
 position = Vector2(30, 0)
 flip_h = true
 my_texture = ExtResource("4_5da8j")
+
+[connection signal="you_died" from="Character" to="." method="_on_character_you_died"]
+[connection signal="you_died" from="Character2" to="." method="_on_character_2_you_died"]

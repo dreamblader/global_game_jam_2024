@@ -14,7 +14,7 @@ extends HBoxContainer
 @onready var buttons_player1: Node2D = $LeftContainer/Content/Butons
 @onready var buttons_player2: Node2D = $RightContainer/Content/Butons
 
-signal end(winner_player_id:int)
+signal end
 
 var player1_life:float
 var player2_life:float
@@ -31,23 +31,43 @@ func _input(event: InputEvent) -> void:
 
 
 func _ready() -> void:
-	player1_life = player_max_life
-	player2_life = player_max_life
-	player1_life_portrait.set_max_life(player_max_life)
-	player2_life_portrait.set_max_life(player_max_life)
+	init_life()
+	init_timer()
 
 
 func start() -> void:
-	timer.wait_time = round_time
 	timer.start()
-	time_display.text = str(round_time)
 	player1_tracker.start_tracker()
 	player2_tracker.start_tracker()
 	music.play()
 
 
+func init_life() -> void:
+	player1_life = player_max_life
+	player2_life = player_max_life
+	player1_life_portrait.set_max_life(player_max_life)
+	player2_life_portrait.set_max_life(player_max_life)
+	player1_life_portrait.reset()
+	player2_life_portrait.reset()
+
+
+func reset() -> void:
+	init_life()
+	init_timer()
+	buttons_player1.reset()
+	buttons_player2.reset()
+	battle.reset()
+	time_display.add_theme_color_override("font_color", Color("#ffa800"))
+
+
+func init_timer() -> void:
+	timer.wait_time = round_time
+	time_display.text = str(round_time)
+
+
 func _process(delta: float) -> void:
-	time_display.text = str(int(timer.time_left))
+	if !timer.is_stopped():
+		time_display.text = str(int(timer.time_left))
 
 
 func _on_buttton_tracker_fail(player_id:int) -> void:
@@ -80,17 +100,44 @@ func player_dmg(player_id:int, value:float) -> void:
 			printerr("Invalid Player ID")
 	player_portrait.set_life(player_life)
 	if player_life <= 0:
-		player1_tracker.kill_tracker()
-		player2_tracker.kill_tracker()
+		end_game()
+		display_winner(reverse_player_id(player_id))
 		battle.player_dies(player_id)
 
 
 func _on_timer_timeout() -> void:
 	if player1_life == player2_life:
-		print("DRAW")
-		pass #DRAW
+		end_game()
+		display_winner(-1)
+		battle.player_lose_timeout(-1)
 	else:
 		var loser_id = 1 if player1_life<player2_life else 2
-		player1_tracker.kill_tracker()
-		player2_tracker.kill_tracker()
+		end_game()
+		display_winner(reverse_player_id(loser_id))
 		battle.player_lose_timeout(loser_id)
+
+
+func end_game()-> void: 
+	timer.stop()
+	player1_tracker.kill_tracker()
+	player2_tracker.kill_tracker()
+	buttons_player1.yeet()
+	buttons_player2.yeet()
+	music.stop()
+
+
+func display_winner(winner_id:int) -> void:
+	var text_color:Color = Color("#29adff") if winner_id == 1 else Color("#00e436") 
+	time_display.add_theme_color_override("font_color", text_color)
+	if winner_id > 0:
+		time_display.text = "Player "+str(winner_id)+"\nWins!"
+	else:
+		time_display.text = "draw"
+
+
+func reverse_player_id(player_id:int) -> int:
+	return 2 if player_id == 1 else 1
+
+
+func _on_battle_over() -> void:
+	emit_signal("end")

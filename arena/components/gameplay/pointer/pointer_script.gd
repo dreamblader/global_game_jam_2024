@@ -75,8 +75,9 @@ func get_distance_hit_type(distance:float) -> HitTypes:
 func check_pointer_distance_prompt(areas: Array[Area2D]) -> float:
 	for area in areas:
 		if area.is_in_group("prompt"):
-			area.pressed()
-			return this_area.global_position.distance_to(area.global_position)
+			var distance = this_area.global_position.distance_to(area.global_position)
+			area.pressed(distance <= hit_distances[hit_distances.size()-1])
+			return distance
 	return -1
 
 

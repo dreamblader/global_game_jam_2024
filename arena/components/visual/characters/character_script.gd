@@ -5,10 +5,17 @@ extends Sprite2D
 var dead:bool = false
 var animation_lock:bool=false
 
+signal you_died
 
 func _ready() -> void:
 	animation.play("idle")
 	self.texture = my_texture
+
+
+func reset() -> void:
+	animation.play("RESET")
+	dead = false
+	animation_lock=false
 
 
 func tickle() -> void:
@@ -25,8 +32,14 @@ func hit() -> void:
 
 func win() -> void:
 	if !animation_lock:
-		animation.play("win")
 		animation_lock = true
+		animation.play("win")
+
+
+func nah() -> void:
+	if !animation_lock:
+		animation_lock = true
+		animation.play("nah")
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -34,6 +47,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		animation.play("dead")
 	elif anim_name == "dead":
 		visible = false
+		emit_signal("you_died")
 	elif dead:
 		animation_lock = true
 		animation.play("hit")

@@ -42,6 +42,8 @@ func stop_tracker() -> void:
 
 
 func start_tracker() -> void:
+	pointer_a.reset()
+	pointer_b.reset()
 	pointer_a.lock = false
 	pointer_b.lock = false
 	prompt_num_start_left = 1
