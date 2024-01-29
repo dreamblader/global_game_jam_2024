@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://b076mtxxcm54g"]
+
+[ext_resource type="Script" path="res://src/arena/components/gameplay/buttons/butons_script.gd" id="1_3iiv3"]
+[ext_resource type="Texture2D" uid="uid://cnj3qfru60ooj" path="res://src/arena/components/gameplay/buttons/circle_button_normal.png" id="2_5orf8"]
+[ext_resource type="Texture2D" uid="uid://bve4lbgppgpwd" path="res://src/arena/components/gameplay/buttons/circle_button_pressedl.png" id="3_vsxq3"]
+[ext_resource type="Texture2D" uid="uid://doee5c6q4j2rw" path="res://src/arena/components/gameplay/buttons/square_button_normal.png" id="4_uq6go"]
+[ext_resource type="Texture2D" uid="uid://d0s3vcmgbn1ru" path="res://src/arena/components/gameplay/buttons/square_button_pressed.png" id="5_yheq5"]
+[ext_resource type="FontFile" uid="uid://bafwgk7nr68a5" path="res://src/arena/components/fonts/Namecat.otf" id="6_2uv64"]
+
+[node name="Butons" type="Node2D"]
+script = ExtResource("1_3iiv3")
+circle_texture = Array[CompressedTexture2D]([ExtResource("2_5orf8"), ExtResource("3_vsxq3")])
+square_texture = Array[CompressedTexture2D]([ExtResource("4_uq6go"), ExtResource("5_yheq5")])
+
+[node name="CircleButtonNormal" type="Sprite2D" parent="."]
+position = Vector2(-40, 0)
+texture = ExtResource("2_5orf8")
+
+[node name="LabelCircle" type="Label" parent="CircleButtonNormal"]
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 7.0
+offset_bottom = 8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_2uv64")
+theme_override_font_sizes/font_size = 25
+text = "A"
+
+[node name="SquareButtonNormal" type="Sprite2D" parent="."]
+position = Vector2(40, 0)
+texture = ExtResource("4_uq6go")
+
+[node name="LabelSquare" type="Label" parent="SquareButtonNormal"]
+offset_left = -7.0
+offset_top = -16.0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_2uv64")
+theme_override_font_sizes/font_size = 25
+text = "S"
