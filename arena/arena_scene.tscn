@@ -1,0 +1,144 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7j0v1cql8uvi"]
+
+[ext_resource type="Script" path="res://arena/arena_script.gd" id="1_heq2r"]
+[ext_resource type="Texture2D" uid="uid://b8h1eeubqfwu7" path="res://arena/components/visual/background.png" id="2_12dn0"]
+[ext_resource type="PackedScene" uid="uid://cuf8tgbiy8bmv" path="res://arena/components/visual/profile/profile_scene.tscn" id="3_4f3ei"]
+[ext_resource type="Texture2D" uid="uid://dfmavs8cd6a4" path="res://arena/components/visual/profile/player_1_portrait.png" id="4_etrix"]
+[ext_resource type="PackedScene" uid="uid://b3olg2bdptcc0" path="res://arena/components/gameplay/tracker/buttton_tracker_scene.tscn" id="5_tobmy"]
+[ext_resource type="PackedScene" uid="uid://b076mtxxcm54g" path="res://arena/components/gameplay/buttons/butons_scene.tscn" id="6_ptmly"]
+[ext_resource type="PackedScene" uid="uid://48fbe3yg01cy" path="res://arena/components/visual/battle/battle_scene.tscn" id="7_dll1s"]
+[ext_resource type="FontFile" uid="uid://bafwgk7nr68a5" path="res://fonts/Namecat.otf" id="8_qtlt7"]
+[ext_resource type="Texture2D" uid="uid://ddltav62o7xhu" path="res://arena/components/visual/profile/player_2_portrait.png" id="9_7avjl"]
+[ext_resource type="AudioStream" uid="uid://cqevhc7v55nha" path="res://arena/music.mp3" id="10_njkkq"]
+
+[node name="Arena" type="HBoxContainer"]
+custom_minimum_size = Vector2(426, 240)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_heq2r")
+player_max_life = 50.0
+round_time = 30.0
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(213, 120)
+texture = ExtResource("2_12dn0")
+
+[node name="LeftContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(85, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Content" type="Control" parent="LeftContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.5
+offset_right = 32.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProfilePicture" parent="LeftContainer/Content" instance=ExtResource("3_4f3ei")]
+my_texture = ExtResource("4_etrix")
+
+[node name="ButttonTracker" parent="LeftContainer/Content" instance=ExtResource("5_tobmy")]
+
+[node name="Butons" parent="LeftContainer/Content" instance=ExtResource("6_ptmly")]
+modulate = Color(0.301961, 0.301961, 0.301961, 1)
+position = Vector2(0, 80)
+label_circle = "A"
+label_square = "S"
+
+[node name="Profile" type="CenterContainer" parent="LeftContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -51.0
+offset_right = 43.5
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MidContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(248, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Content" type="Control" parent="MidContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Battle" parent="MidContainer/Content" instance=ExtResource("7_dll1s")]
+
+[node name="Label" type="Label" parent="MidContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 43.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.658824, 0, 1)
+theme_override_fonts/font = ExtResource("8_qtlt7")
+theme_override_font_sizes/font_size = 35
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(85, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Content" type="Control" parent="RightContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.5
+offset_right = -27.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProfilePicture" parent="RightContainer/Content" instance=ExtResource("3_4f3ei")]
+my_texture = ExtResource("9_7avjl")
+
+[node name="ButttonTracker" parent="RightContainer/Content" instance=ExtResource("5_tobmy")]
+player_id = 2
+
+[node name="Butons" parent="RightContainer/Content" instance=ExtResource("6_ptmly")]
+position = Vector2(0, 80)
+label_circle = "K"
+label_square = "L"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_njkkq")
+
+[connection signal="fail" from="LeftContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_fail"]
+[connection signal="hit" from="LeftContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_hit"]
+[connection signal="over" from="MidContainer/Content/Battle" to="." method="_on_battle_over"]
+[connection signal="fail" from="RightContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_fail"]
+[connection signal="hit" from="RightContainer/Content/ButttonTracker" to="." method="_on_buttton_tracker_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

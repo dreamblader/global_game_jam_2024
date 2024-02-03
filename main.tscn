@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://d18i4utudkesw"]
+
+[ext_resource type="PackedScene" uid="uid://b7j0v1cql8uvi" path="res://arena/arena_scene.tscn" id="1_gt2aw"]
+[ext_resource type="Script" path="res://main_script.gd" id="1_ycqdw"]
+[ext_resource type="PackedScene" uid="uid://g1k1pnsgcy6o" path="res://menu/menu_scene.tscn" id="3_1rx4b"]
+
+[node name="Root" type="Node2D"]
+script = ExtResource("1_ycqdw")
+
+[node name="Arena" parent="." instance=ExtResource("1_gt2aw")]
+offset_right = 426.0
+offset_bottom = 240.0
+
+[node name="Menu" parent="." instance=ExtResource("3_1rx4b")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 426.0
+offset_bottom = 240.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Fade" type="ColorRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(426, 240)
+offset_right = 426.0
+offset_bottom = 240.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="end" from="Arena" to="." method="_on_arena_end"]
+[connection signal="play" from="Menu" to="." method="_on_menu_play"]

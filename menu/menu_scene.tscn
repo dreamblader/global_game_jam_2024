@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://g1k1pnsgcy6o"]
+
+[ext_resource type="Texture2D" uid="uid://c7j5pglod1e34" path="res://logo.png" id="1_ey5u0"]
+[ext_resource type="Script" path="res://menu/menu_script.gd" id="1_rmg6l"]
+[ext_resource type="PackedScene" uid="uid://il8v30qkjmu3" path="res://menu/item/menu_item_scene.tscn" id="2_8i7jh"]
+
+[node name="MenuScene" type="Control"]
+custom_minimum_size = Vector2(426, 240)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rmg6l")
+metadata/_edit_horizontal_guides_ = [11.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(426, 240)
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+color = Color(0, 0, 0, 1)
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(214, 60)
+texture = ExtResource("1_ey5u0")
+
+[node name="MenuContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MenuItem" parent="MenuContainer" instance=ExtResource("2_8i7jh")]
+text = "Play"
+
+[node name="MenuItem2" parent="MenuContainer" instance=ExtResource("2_8i7jh")]
+position = Vector2(0, 50)
+text = "Quit"

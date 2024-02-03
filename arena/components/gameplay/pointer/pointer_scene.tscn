@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwx6lsilwu6h1"]
+
+[ext_resource type="Script" path="res://arena/components/gameplay/pointer/pointer_script.gd" id="1_37i7n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_loorg"]
+radius = 5.0
+
+[node name="Pointer" type="Node2D"]
+script = ExtResource("1_37i7n")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 60)
+
+[node name="Area" type="Area2D" parent="."]
+position = Vector2(0, 60)
+
+[node name="Collision" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_loorg")
+
+[connection signal="area_exited" from="Area" to="." method="_on_area_area_exited"]
