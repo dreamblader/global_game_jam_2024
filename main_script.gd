@@ -1,7 +1,7 @@
-extends Node2D
+extends Control
 
 @onready var fade:ColorRect = $Fade
-@onready var game:HBoxContainer = $Arena
+@onready var game:Control = $Arena
 @onready var menu:Control = $Menu
 
 @export var fade_duration:float = 1.0

@@ -1,8 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://g1k1pnsgcy6o"]
+[gd_scene load_steps=8 format=3 uid="uid://g1k1pnsgcy6o"]
 
 [ext_resource type="Texture2D" uid="uid://c7j5pglod1e34" path="res://logo.png" id="1_ey5u0"]
 [ext_resource type="Script" path="res://menu/menu_script.gd" id="1_rmg6l"]
 [ext_resource type="PackedScene" uid="uid://il8v30qkjmu3" path="res://menu/item/menu_item_scene.tscn" id="2_8i7jh"]
+[ext_resource type="Texture2D" uid="uid://dln76arcjgdmh" path="res://menu/back_faces.png" id="2_10sqt"]
+
+[sub_resource type="Animation" id="Animation_co3ts"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FacesPosition/Faces:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-540, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2hgyr"]
+resource_name = "back_move"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FacesPosition/Faces:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-540, 0), Vector2(-900, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c17ti"]
+_data = {
+"RESET": SubResource("Animation_co3ts"),
+"back_move": SubResource("Animation_2hgyr")
+}
 
 [node name="MenuScene" type="Control"]
 custom_minimum_size = Vector2(426, 240)
@@ -16,11 +55,27 @@ script = ExtResource("1_rmg6l")
 metadata/_edit_horizontal_guides_ = [11.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(426, 240)
-layout_mode = 0
-offset_right = 426.0
-offset_bottom = 240.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="FacesPosition" type="Node2D" parent="."]
+rotation = -0.785398
+
+[node name="Faces" type="TextureRect" parent="FacesPosition"]
+modulate = Color(1, 1, 1, 0.117647)
+custom_minimum_size = Vector2(426, 240)
+anchors_preset = -1
+offset_left = -540.0
+offset_right = 900.0
+offset_bottom = 540.0
+grow_horizontal = 2
+texture = ExtResource("2_10sqt")
+stretch_mode = 1
 
 [node name="Logo" type="Sprite2D" parent="."]
 position = Vector2(214, 60)
@@ -43,3 +98,8 @@ text = "Play"
 [node name="MenuItem2" parent="MenuContainer" instance=ExtResource("2_8i7jh")]
 position = Vector2(0, 50)
 text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c17ti")
+}

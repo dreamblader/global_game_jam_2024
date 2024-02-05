@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 @export var player_max_life:float = 100
 @export var round_time:float = 20.0

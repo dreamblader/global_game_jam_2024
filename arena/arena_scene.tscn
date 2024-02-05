@@ -11,8 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://ddltav62o7xhu" path="res://arena/components/visual/profile/player_2_portrait.png" id="9_7avjl"]
 [ext_resource type="AudioStream" uid="uid://cqevhc7v55nha" path="res://arena/music.mp3" id="10_njkkq"]
 
-[node name="Arena" type="HBoxContainer"]
+[node name="Arena" type="Control"]
 custom_minimum_size = Vector2(426, 240)
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -22,13 +23,27 @@ script = ExtResource("1_heq2r")
 player_max_life = 50.0
 round_time = 30.0
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(213, 120)
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_12dn0")
+
+[node name="Background" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_12dn0")
+offset = Vector2(213, 120)
 
 [node name="LeftContainer" type="Control" parent="."]
 custom_minimum_size = Vector2(85, 240)
 layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.2
+anchor_bottom = 1.0
+offset_right = -0.200005
 size_flags_horizontal = 3
 
 [node name="Content" type="Control" parent="LeftContainer"]
@@ -49,7 +64,6 @@ my_texture = ExtResource("4_etrix")
 [node name="ButttonTracker" parent="LeftContainer/Content" instance=ExtResource("5_tobmy")]
 
 [node name="Butons" parent="LeftContainer/Content" instance=ExtResource("6_ptmly")]
-modulate = Color(0.301961, 0.301961, 0.301961, 1)
 position = Vector2(0, 80)
 label_circle = "A"
 label_square = "S"
@@ -71,6 +85,12 @@ grow_vertical = 2
 [node name="MidContainer" type="Control" parent="."]
 custom_minimum_size = Vector2(248, 240)
 layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.209
+anchor_right = 0.791
+anchor_bottom = 1.0
+offset_left = -0.0340042
+offset_right = 0.0339966
 size_flags_horizontal = 3
 
 [node name="Content" type="Control" parent="MidContainer"]
@@ -105,6 +125,11 @@ vertical_alignment = 1
 [node name="RightContainer" type="Control" parent="."]
 custom_minimum_size = Vector2(85, 240)
 layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.199982
 size_flags_horizontal = 3
 
 [node name="Content" type="Control" parent="RightContainer"]

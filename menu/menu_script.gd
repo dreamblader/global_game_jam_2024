@@ -1,6 +1,7 @@
 extends Control
 
 @onready var menu:Control = $MenuContainer
+@onready var animation:AnimationPlayer = $AnimationPlayer
 
 var current_index: int = 0
 
@@ -16,6 +17,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _ready() -> void:
+	animation.play("back_move")
 	select_menu()
 
 
