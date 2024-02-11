@@ -65,6 +65,7 @@ my_texture = ExtResource("4_etrix")
 
 [node name="Butons" parent="LeftContainer/Content" instance=ExtResource("6_ptmly")]
 position = Vector2(0, 80)
+player_id = 1
 label_circle = "A"
 label_square = "S"
 
@@ -152,6 +153,7 @@ player_id = 2
 
 [node name="Butons" parent="RightContainer/Content" instance=ExtResource("6_ptmly")]
 position = Vector2(0, 80)
+player_id = 2
 label_circle = "K"
 label_square = "L"
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b076mtxxcm54g"]
+[gd_scene load_steps=8 format=3 uid="uid://b076mtxxcm54g"]
 
 [ext_resource type="Script" path="res://arena/components/gameplay/buttons/butons_script.gd" id="1_3iiv3"]
 [ext_resource type="Texture2D" uid="uid://cnj3qfru60ooj" path="res://arena/components/gameplay/buttons/circle_button_normal.png" id="2_5orf8"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://doee5c6q4j2rw" path="res://arena/components/gameplay/buttons/square_button_normal.png" id="4_uq6go"]
 [ext_resource type="Texture2D" uid="uid://d0s3vcmgbn1ru" path="res://arena/components/gameplay/buttons/square_button_pressed.png" id="5_yheq5"]
 [ext_resource type="FontFile" uid="uid://bafwgk7nr68a5" path="res://fonts/Namecat.otf" id="6_u4fjc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7lfk7"]
+size = Vector2(34, 42)
 
 [node name="Butons" type="Node2D"]
 script = ExtResource("1_3iiv3")
@@ -26,6 +29,9 @@ theme_override_fonts/font = ExtResource("6_u4fjc")
 theme_override_font_sizes/font_size = 25
 text = "A"
 
+[node name="CircleTouch" type="TouchScreenButton" parent="CircleButtonNormal"]
+shape = SubResource("RectangleShape2D_7lfk7")
+
 [node name="SquareButtonNormal" type="Sprite2D" parent="."]
 position = Vector2(40, 0)
 texture = ExtResource("4_uq6go")
@@ -39,3 +45,11 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_u4fjc")
 theme_override_font_sizes/font_size = 25
 text = "S"
+
+[node name="SquareTouch" type="TouchScreenButton" parent="SquareButtonNormal"]
+shape = SubResource("RectangleShape2D_7lfk7")
+
+[connection signal="pressed" from="CircleButtonNormal/CircleTouch" to="." method="_on_circle_touch_pressed"]
+[connection signal="released" from="CircleButtonNormal/CircleTouch" to="." method="_on_circle_touch_released"]
+[connection signal="pressed" from="SquareButtonNormal/SquareTouch" to="." method="_on_square_touch_pressed"]
+[connection signal="released" from="SquareButtonNormal/SquareTouch" to="." method="_on_square_touch_released"]
