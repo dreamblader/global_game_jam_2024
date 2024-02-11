@@ -1,11 +1,11 @@
-extends Control
+extends Screen
 
 @onready var menu:Control = $MenuContainer
+@onready var touch_menu:VBoxContainer = $MenuContainerTouch
 @onready var animation:AnimationPlayer = $AnimationPlayer
 
 var current_index: int = 0
 
-signal play
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_down"):
@@ -18,7 +18,11 @@ func _input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	animation.play("back_move")
-	select_menu()
+	menu.visible = !Utils.game_is_in_mobile()
+	touch_menu.visible = Utils.game_is_in_mobile()
+	
+	if !Utils.game_is_in_mobile():
+		select_menu()
 
 
 func move_index(value:int) -> void:
@@ -40,6 +44,16 @@ func select_menu() -> void:
 func confirm_option() -> void:
 	match current_index:
 		0:
-			emit_signal("play")
+			emit_signal("go_to", 1)
 		1:
 			get_tree().quit()
+
+
+func _on_button_play_pressed() -> void:
+	current_index = 0
+	confirm_option()
+
+
+func _on_button_quit_pressed() -> void:
+		current_index = 1
+		confirm_option()

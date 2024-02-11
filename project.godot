@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="global_game_jam"
-run/main_scene="res://main.tscn"
+config/name="Chuckle Champions"
+run/main_scene="res://splash/splash_scene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Utils="*res://utils/utils_script.gd"
 
 [display]
 
@@ -51,10 +55,6 @@ tickle_b2={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":76,"key_label":0,"unicode":108,"echo":false,"script":null)
 ]
 }
-
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
 
 [rendering]
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d18i4utudkesw"]
+[gd_scene load_steps=5 format=3 uid="uid://d18i4utudkesw"]
 
 [ext_resource type="PackedScene" uid="uid://b7j0v1cql8uvi" path="res://arena/arena_scene.tscn" id="1_gt2aw"]
 [ext_resource type="Script" path="res://main_script.gd" id="1_ycqdw"]
+[ext_resource type="PackedScene" uid="uid://6f26k75oyqtj" path="res://manager/scene/scene_manager.tscn" id="2_84slr"]
 [ext_resource type="PackedScene" uid="uid://g1k1pnsgcy6o" path="res://menu/menu_scene.tscn" id="3_1rx4b"]
 
 [node name="Root" type="Control"]
@@ -13,11 +14,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ycqdw")
 
-[node name="Arena" parent="." instance=ExtResource("1_gt2aw")]
+[node name="SceneManager" parent="." instance=ExtResource("2_84slr")]
 layout_mode = 1
-
-[node name="Menu" parent="." instance=ExtResource("3_1rx4b")]
-layout_mode = 1
+game_scenes = Array[PackedScene]([ExtResource("3_1rx4b"), ExtResource("1_gt2aw")])
 
 [node name="Fade" type="ColorRect" parent="."]
 texture_filter = 1
@@ -31,5 +30,4 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[connection signal="end" from="Arena" to="." method="_on_arena_end"]
-[connection signal="play" from="Menu" to="." method="_on_menu_play"]
+[connection signal="call_transition" from="SceneManager" to="." method="_on_scene_manager_call_transition"]

@@ -1,4 +1,4 @@
-extends Control
+extends Screen
 
 @export var player_max_life:float = 100
 @export var round_time:float = 20.0
@@ -13,8 +13,6 @@ extends Control
 @onready var music:AudioStreamPlayer = $Music
 @onready var buttons_player1: Node2D = $LeftContainer/Content/Butons
 @onready var buttons_player2: Node2D = $RightContainer/Content/Butons
-
-signal end
 
 var player1_life:float
 var player2_life:float
@@ -140,4 +138,4 @@ func reverse_player_id(player_id:int) -> int:
 
 
 func _on_battle_over() -> void:
-	emit_signal("end")
+	emit_signal("go_to", 0)
