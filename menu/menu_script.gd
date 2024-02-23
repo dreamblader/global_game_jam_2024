@@ -55,5 +55,5 @@ func _on_button_play_pressed() -> void:
 
 
 func _on_button_quit_pressed() -> void:
-		current_index = 1
-		confirm_option()
+	current_index = 1
+	confirm_option()

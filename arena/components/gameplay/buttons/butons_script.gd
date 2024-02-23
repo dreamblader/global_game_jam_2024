@@ -22,8 +22,8 @@ func _ready() -> void:
 	square_sprite.texture = square_texture[0]
 	circle_touch.action = tickle_a+str(player_id)
 	square_touch.action = tickle_b+str(player_id)
-	circle_text.text = label_circle
-	square_text.text = label_square
+	circle_text.text = get_label(label_circle)
+	square_text.text = get_label(label_square)
 
 
 func reset() -> void:
@@ -61,6 +61,13 @@ func change_button(button_id:int, press: bool) -> void:
 			2:
 				square_sprite.texture = square_texture[texture_index]
 				square_text.position.y = label_position
+
+
+func get_label(label:String) -> String:
+	if Utils.game_is_in_mobile():
+		return ""
+	else:
+		return label
 
 
 func _on_circle_touch_pressed() -> void:

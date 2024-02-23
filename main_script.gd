@@ -31,8 +31,10 @@ func _on_scene_manager_call_transition() -> void:
 
 func apply_next_screen() -> void:
 	manager.apply()
+	fade.mouse_filter = Control.MOUSE_FILTER_STOP
 	fade_out()
 
 
 func start_next_screen() -> void:
+	fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	manager.start()
